@@ -40,13 +40,13 @@
           <div class="d-flex">
             <div class="form-check me-3">
               <input class="form-check-input" type="radio" name="jenis_kelamin"
-              id="laki_laki" value="L"
+              id="laki_laki" value="L" 
               {{ old('jenis_kelamin')=='L' ? 'checked': '' }}>
               <label class="form-check-label" for="laki_laki">Laki-laki</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="jenis_kelamin"
-              id="perempuan" value="P"
+              id="perempuan" value="P" 
               {{ old('jenis_kelamin')=='P' ? 'checked': '' }}>
               <label class="form-check-label" for="perempuan">Perempuan</label>
             </div>
@@ -58,7 +58,7 @@
 
         <div class="mb-3">
           <label class="form-label" for="jurusan">Jurusan</label>
-          <select class="form-select" name="jurusan" id="jurusan"
+          <select class="form-select" name="jurusan" id="jurusan" 
           value="{{ old('jurusan') }}">
             <option value="Teknik Informatika"
             {{ old('jurusan')=='Teknik Informatika' ? 'selected': '' }} >
@@ -88,7 +88,7 @@
 
         <div class="mb-3">
           <label class="form-label" for="alamat">Alamat</label>
-          <textarea class="form-control" id="alamat" rows="3"
+          <textarea class="form-control" id="alamat" rows="3" 
           name="alamat">{{ old('alamat') }}</textarea>
         </div>
 
@@ -98,5 +98,6 @@
     </div>
   </div>
 </div>
+
 </body>
 </html>
