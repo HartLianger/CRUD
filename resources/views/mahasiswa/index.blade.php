@@ -1,3 +1,4 @@
+{{-- {{ session()->get('pesan')}} --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,12 +13,19 @@
 <div class="container mt-3">
   <div class="row">
     <div class="col-12">
+
     <div class="py-4 d-flex justify-content-between align-items-center">
-        <h2>Tabel Mahasiswa</h2>
+      <h2>Tabel Mahasiswa</h2>
       <a href="{{ route('mahasiswas.create') }}" class="btn btn-primary">
         Tambah Mahasiswa
       </a>
     </div>
+
+    @if(session()->has('pesan'))
+    <div class="alert alert-success">
+      {{ session()->get('pesan')}}
+    </div>
+    @endif
 
     <table class="table table-striped">
       <thead>

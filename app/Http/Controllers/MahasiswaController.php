@@ -21,35 +21,52 @@ class MahasiswaController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'nim'           => 'required|size:8',
+            'nim'           => 'required|size:8|unique:mahasiswas',
             'nama'          => 'required|min:3|max:50',
             'jenis_kelamin' => 'required|in:P,L',
             'jurusan'       => 'required',
             'alamat'        => '',
         ]);
 
-
-
-        // mass assignment
         Mahasiswa::create($validateData);
 
-        return "Data berhasil diinput ke database";
+        return redirect()->route('mahasiswas.index')->with('pesan',"Penambahan data {$validateData['nama']} berhasil");
     }
-
-    // public function show($mahasiswa)
-    // {
-    //     // dd($mahasiswa);
-
-    //     // $result = Mahasiswa::find($mahasiswa);  // akan error jika id mahasiswa belum ada
-    //     $result =  Mahasiswa::findOrFail($mahasiswa);
-    //     return view('mahasiswa.show',['mahasiswa' => $result]);
-    // }
-
-
 
     public function show(Mahasiswa $mahasiswa)
     {
         return view('mahasiswa.show',['mahasiswa' => $mahasiswa]);
+    }
+
+    public function edit(Mahasiswa $mahasiswa)
+    {
+        return view('mahasiswa.edit',['mahasiswa' => $mahasiswa]);
+    }
+
+    public function update(Request $request, Mahasiswa $mahasiswa)
+    {
+        // dump($request->all());
+        // dump($mahasiswa);
+
+        $validateData = $request->validate([
+            'nim'           => 'required|size:8|unique:mahasiswas,nim,'.$mahasiswa->id,
+            'nama'          => 'required|min:3|max:50',
+            'jenis_kelamin' => 'required|in:P,L',
+            'jurusan'       => 'required',
+            'alamat'        => '',
+        ]);
+
+        // Mahasiswa::where('id',$mahasiswa->id)->update($validateData);
+
+        $mahasiswa->update($validateData);
+
+        return redirect()->route('mahasiswas.show',['mahasiswa' => $mahasiswa->id])->with('pesan',"Update data {$validateData['nama']} berhasil");
+    }
+
+    public function destroy(Mahasiswa $mahasiswa)
+    {
+        $mahasiswa->delete();
+        return redirect()->route('mahasiswas.index')->with('pesan',"Hapus data $mahasiswa->nama berhasil");
     }
 
 }
